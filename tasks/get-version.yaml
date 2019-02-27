@@ -1,0 +1,24 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ldbl/get-version
+    tag: v1.0.0
+
+inputs:
+- name: color-coded-source
+
+outputs:
+- name: color-coded-version
+
+run:
+  path: bash
+  args:
+  - -exc
+  - |
+    ls -la
+    mkdir -p color-coded-version
+    cd color-coded-source && git tag -l --points-at HEAD | tail -n1 > ../color-coded-version/version && cat ../color-coded-version/version
+

@@ -1,0 +1,29 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ldbl/concourse-go
+    tag: golang-1.10.3-alpine
+
+inputs:
+- name: color-coded-source
+
+outputs:
+- name: color-coded-binary
+
+run:
+  path: ash
+  args:
+  - -exc
+  - |
+    pwd
+    ls -la
+    export GOPATH=$(pwd)
+    mkdir -p src && cp -r color-coded-source src/ && cd src/color-coded-source
+    go get 
+    CGO_ENABLED=0 GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o color-coded .
+    go test -cover
+    cp color-coded ../../color-coded-binary/
+
