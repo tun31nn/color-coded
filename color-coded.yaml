@@ -5,7 +5,7 @@ resource_types:
 - name: helm
   type: docker-image
   source:
-    repository: ldbl/helm-concourse-gcp
+    repository: tun31nn/helm-concourse-gcp
     tag: v2.12.2-helm
 
 resources:
@@ -13,7 +13,7 @@ resources:
   type: helm
   source:
     release: {{release_name}}
-    cluster_url: https://kubernetes
+    cluster_url: https://959f4453-8ef5-41e9-91c7-b3579c94dffd.k8s.ondigitalocean.com
     cluster_ca: {{cluster_ca}}
     token: {{token}}
     repos:
@@ -30,7 +30,7 @@ resources:
 - name: color-coded-source
   type: git
   source:
-    uri: https://github.com/ldbl/color-coded.git
+    uri: https://github.com/tun31nn/color-coded.git
     branch: master
     tag_filter: v*
     username: {{git-user}}
@@ -39,7 +39,7 @@ resources:
 - name: chart-color-coded
   type: git
   source:
-    uri: https://github.com/ldbl/chart-color-coded.git
+    uri: https://github.com/tun31nn/chart-color-coded.git
     branch: master
     tag_filter: v*
     username: {{git-user}}
