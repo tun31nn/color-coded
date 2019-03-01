@@ -96,8 +96,9 @@ jobs:
           path: color-coded-image/repository
         - key: image.digest
           path: color-coded-image/digest
-
-  - name: build-and-publish-docker-image
+        - key: imagePullSecret
+          value: gcr  
+	- name: build-and-publish-docker-image
     plan:
     - get: color-coded-source
       trigger: true
